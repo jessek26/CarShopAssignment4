@@ -1,0 +1,62 @@
+.app-header{
+    background: rgb(226, 48, 48);
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0 20px;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  padding: 0% 1.25%;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.75rem;
+}
+
+.nav-link:hover {
+  color: #cccccc;
+}
+
+
+
+/* Used AI to generate the code below (styling shopping cart icon) */
+.cart-container {
+  position: relative; 
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cart-icon {
+  font-size: 24px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;          /* Moves the badge up */
+  right: -10px;       /* Moves the badge to the right */
+  background-color: #ff4757; /* Bright red/pink color */
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%; /* Makes it a perfect circle */
+  width: 20px;
+  height: 20px;
+  display: flex;      /* Centers the number inside the circle */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Adds a subtle shadow for depth */
+}

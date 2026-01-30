@@ -1,0 +1,39 @@
+/* used google gemini for majority of footer */
+
+.footer {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 4px solid rgb(226, 48, 48);
+}
+
+.footer-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.footer-text {
+    text-align: right;
+}
+
+.footer-text p {
+    margin: 5px 0;
+    color: #cccccc;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-text {
+        text-align: center;
+    }
+}

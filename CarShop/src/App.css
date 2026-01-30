@@ -1,0 +1,7 @@
+.cars-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px;
+  gap: 50px;
+}

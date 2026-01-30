@@ -1,0 +1,1 @@
+Jesse's Car Shop 🚗 A responsive frontend application for a car dealership that I built with React and Vite. This project was developed as part of a Frontend Development coursework to demonstrate my learning of React components, props, and other skills!
