@@ -1,10 +1,11 @@
 import './App.css'
 import Header from './components/Header';
-import ProductCard from './components/ProductCard'
-import Hero from './components/Hero';
 import Footer from './components/Footer';
-import {useState} from 'react';
-import CartItem from './components/CartItem';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ProductsPage from './pages/ProductsPage';
+import CartPage from './pages/CartPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   const cars = [
@@ -31,7 +32,15 @@ function App() {
     }
   ]
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart)); },
+    [cart]);
+  
 
   const addToCart = (data) => {
     setCart([...cart, data]);
@@ -41,68 +50,28 @@ function App() {
     const updatedCart = cart.filter(item => item.id !== idToRemove);
     setCart(updatedCart);
   }
-
-  const findTotal = () => {
-    return cart.reduce((total, item) => {
-      const stripPrice = item.price.replace(/[$,]/g, ""); // removes $ and , from the price so its just a number
-      
-      return total + Number(stripPrice);
-    }, 0);
-  };
   
   return (
-    
-
-    <div className="app">
-      <Header
-      logo="Jesse's Car Shop"
-      cartCount={cart.length}
-      />
-
-      <Hero
-      lotPic="https://di-uploads-pod12.dealerinspire.com/automotiveavenue/uploads/2021/08/header.jpg"
-      welcome="Welcome to Jesse's Car Shop"
-      caption="Shop Jesse's inventory online!"></Hero>
-      
-    <main className="cars-grid">
-      {cars.map((car) => (
-      <ProductCard
-      productData={car}
-      key={car.id}
-      carPhoto={car.image}
-      makeModel={car.make}
-      specs={car.specs}
-      price={car.price}
-      onAddToCart={addToCart}/>))}
-      
-      
-      </main>
-      <div className="cart-section">
-        <h2>Your Cart</h2>
-        {cart.length === 0 && <p>Your cart is empty.</p>} {/* empty cart */}
-
-        {cart.map((item, index) => (
-          <CartItem
-          key={index}
-          item={item}
-          onRemove={removeFromCart}
-          />
-        
-        ))}
-        {cart.length > 0 && (
-        <div className="cart-total">
-            <h3>Total: ${findTotal().toLocaleString()}</h3>
-        </div>
-        )}
+    <BrowserRouter>
+      <div className="app">
+        <Header
+        logo="Jesse's Car Shop"
+        cartCount={cart.length}
+        />
+        <Routes>
+          <Route path ='/' element={<HomePage />}/>
+          <Route path ='/products' element={<ProductsPage  products={cars} addToCart={addToCart} />}/>
+          <Route path ='/cart' element={<CartPage products={cart} removeFromCart={removeFromCart} />}/>
+        </Routes>
+        <Footer
+        logo="Jesse's Car Shop"
+        email='jessescarshop@gmail.com'
+        phone='1(800)-CAR-SHOP'
+        address='12 Appleberry Lane'
+        ></Footer>
       </div>
-      <Footer
-      logo="Jesse's Car Shop"
-      email='jessescarshop@gmail.com'
-      phone='1(800)-CAR-SHOP'
-      address='12 Appleberry Lane'
-      ></Footer>
-    </div>
-  )
+    </BrowserRouter>
+  );
 }
 
 export default App;
